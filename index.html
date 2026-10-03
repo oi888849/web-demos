@@ -115,6 +115,7 @@
   .chip{display:inline-block; padding:4px 11px; border-radius:999px; font-size:11.5px; font-weight:600; margin-bottom:11px; letter-spacing:.02em;}
   .chip.oai{background:rgba(16,185,129,.15); color:#34d399; border:1px solid rgba(16,185,129,.4);}
   .chip.ant{background:rgba(244,114,182,.15); color:#f9a8d4; border:1px solid rgba(244,114,182,.4);}
+  .chip.misc{background:rgba(255,255,255,.10); color:#cdd6ff; border:1px solid rgba(255,255,255,.22);}
   .film h3{font-size:17px; margin-bottom:6px;}
   .film p{color:var(--sub); font-size:13px; line-height:1.6;}
   .film .hint{margin-top:10px; font-size:12px; color:rgba(226,232,255,.4);}
@@ -150,7 +151,7 @@
         <p class="sub reveal d4">单文件 · 零依赖的交互式演示。<br>宣传片实时可播（B站直嵌 + 本地），打开即享流畅体验。</p>
         <div class="stats reveal d5">
           <div class="stat"><b>2</b>个演示</div>
-          <div class="stat"><b>3</b>品牌影片</div>
+          <div class="stat"><b>24</b>品牌影片</div>
           <div class="stat"><b>0</b>演示依赖</div>
         </div>
     </section>
@@ -178,36 +179,262 @@
         <p>真实品牌发布影片</p>
       </div>
       <div class="films">
-        <article class="film reveal d6">
-          <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1dTtv6aE5y&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
-          <div class="film-meta">
-            <span class="chip oai">OpenAI</span>
-            <h3>Introducing GPT-6 Astra</h3>
-            <p>OpenAI 旗舰模型发布影片——自主操作电脑、从一条指令到实体物件。B站嵌入，中文字幕，直接可播。</p>
-            <p class="hint">来自 B站 BV1dTtv6aE5y</p>
-          </div>
-        </article>
-        <article class="film reveal d6">
-          <video class="film-v" controls preload="metadata" playsinline poster="">
-            <source src="videos/claude-fable5.mp4" type="video/mp4">
-            您的浏览器不支持视频播放。
-          </video>
-          <div class="film-meta">
-            <span class="chip ant">Anthropic</span>
-            <h3>Claude Fable 5.1 宣传片</h3>
-            <p>Anthropic Fable 5.1 创意 / 通用能力发布影片（本地直出）。</p>
-            <p class="hint">本地 videos/claude-fable5.mp4 · 18MB</p>
-          </div>
-        </article>
-        <article class="film reveal d6">
-          <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1cLaL6cEJb&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
-          <div class="film-meta">
-            <span class="chip xai">xAI · Grok</span>
-            <h3>Grok Bot 官方宣传片</h3>
-            <p>xAI 具名 AI 队友 Grok Bot 的官方宣传片——B站嵌入，英文原声·中英双语字幕，直接可播。</p>
-            <p class="hint">来自 B站 BV1cLaL6cEJb</p>
-          </div>
-        </article>
+      <article class="film reveal d6">
+      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1cLaL6cEJb&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
+      <div class="film-meta">
+        <span class="chip xai">xAI · Grok</span>
+        <h3>Grok Bot 官方宣传片</h3>
+        <p>xAI 具名 AI 队友 Grok Bot 官方宣传片。</p>
+        <p class="hint">来自 B站 BV1cLaL6cEJb</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1dTtv6aE5y&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
+      <div class="film-meta">
+        <span class="chip oai">OpenAI</span>
+        <h3>Introducing GPT-6 Astra</h3>
+        <p>OpenAI 旗舰模型发布影片——自主操作电脑、从一条指令到实体物件。</p>
+        <p class="hint">来自 B站 BV1dTtv6aE5y</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/claude-fable5.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip ant">Anthropic</span>
+        <h3>Claude Fable 5.1 宣传片</h3>
+        <p>Anthropic Fable 5.1 创意 / 通用能力发布影片（本地直出）。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/kimi-k3.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">Moonshot · Kimi</span>
+        <h3>Kimi K3 宣传片</h3>
+        <p>Moonshot Kimi K3 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/grok-4-7.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip xai">xAI</span>
+        <h3>Grok 4.7 宣传片</h3>
+        <p>xAI Grok 4.7 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/claude-opus-5-5.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip ant">Anthropic</span>
+        <h3>Claude Opus 5.5 宣传片</h3>
+        <p>Anthropic Claude Opus 5.5 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/minimax-design.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">MiniMax</span>
+        <h3>MiniMax Design 宣传片</h3>
+        <p>MiniMax Design 模型发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/minimax-h3.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">MiniMax</span>
+        <h3>MiniMax H3 宣传片</h3>
+        <p>MiniMax H3 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/minimax-m3.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">MiniMax</span>
+        <h3>MiniMax M3 宣传片</h3>
+        <p>MiniMax M3 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/zhipu-glm-5.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">智谱 AI</span>
+        <h3>智谱 GLM-5 宣传片</h3>
+        <p>智谱 GLM-5 系列发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/zhipu-glm-5-1.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">智谱 AI</span>
+        <h3>智谱 GLM-5.1 宣传片</h3>
+        <p>智谱 GLM-5.1 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/zhipu-glm-5-2.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">智谱 AI</span>
+        <h3>智谱 GLM-5.2 宣传片</h3>
+        <p>智谱 GLM-5.2 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/zhipu-glm-5-3.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">智谱 AI</span>
+        <h3>智谱 GLM-5.3 宣传片</h3>
+        <p>智谱 GLM-5.3 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/zhipu-glm-5-3-flash.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">智谱 AI</span>
+        <h3>智谱 GLM-5.3-Flash 宣传片</h3>
+        <p>智谱 GLM-5.3-Flash 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/zhipu-glm-5v-turbo.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">智谱 AI</span>
+        <h3>智谱 GLM-5V-Turbo 宣传片</h3>
+        <p>智谱 GLM-5V-Turbo 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/hunyuan-video-foley.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">腾讯混元</span>
+        <h3>腾讯混元 Video-Foley 宣传片</h3>
+        <p>腾讯混元 Video-Foley 图生视频发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/hunyuan-t1-show.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">腾讯混元</span>
+        <h3>腾讯混元 T1 · 展示</h3>
+        <p>腾讯混元 T1 深度思考模型展示片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/qwen-audio-3-0.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">阿里 · Qwen</span>
+        <h3>阿里 Qwen-Audio 3.0 宣传片</h3>
+        <p>阿里巴巴 Qwen-Audio 3.0 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/qwen-audio-3-1.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">阿里 · Qwen</span>
+        <h3>阿里 Qwen-Audio 3.1 宣传片</h3>
+        <p>阿里巴巴 Qwen-Audio 3.1 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/qwen2-math.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">阿里 · Qwen</span>
+        <h3>阿里 Qwen2-Math 宣传片</h3>
+        <p>阿里巴巴 Qwen2-Math 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/stepfun-step5.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">阶跃 StepFun</span>
+        <h3>阶跃 Step5 宣传片</h3>
+        <p>阶跃 StepFun Step5 发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <video class="film-v" controls preload="metadata" playsinline poster="">
+        <source src="videos/ai-promo-extra.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+      <div class="film-meta">
+        <span class="chip misc">阿里 · 通义千问</span>
+        <h3>阿里 千问办公 宣传片</h3>
+        <p>阿里巴巴通义千问「千问办公」产品发布影片。</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1cQap6UEDY&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
+      <div class="film-meta">
+        <span class="chip oai">OpenAI</span>
+        <h3>OpenAI 2026 发布会宣传片</h3>
+        <p>OpenAI 2026 秋季发布会影片（超 100MB，B站直嵌）。</p>
+        <p class="hint">来自 B站 BV1cQap6UEDY</p>
+      </div>
+      </article>
+      <article class="film reveal d6">
+      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1xUoCYEE1L&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
+      <div class="film-meta">
+        <span class="chip misc">腾讯混元</span>
+        <h3>腾讯混元 T1 正式版发布</h3>
+        <p>腾讯混元 T1 深度思考模型正式版发布影片（超 100MB，B站直嵌）。</p>
+        <p class="hint">来自 B站 BV1xUoCYEE1L</p>
+      </div>
+      </article>
       </div>
     </section>
   </div>
