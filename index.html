@@ -27,7 +27,6 @@
     display:flex; flex-direction:column;
   }
 
-  /* ===== 极光星云背景 ===== */
   .aurora{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
   .blob{position:absolute; border-radius:50%; filter:blur(80px); opacity:.55; mix-blend-mode:screen; will-change:transform;}
   .b1{width:46vmax;height:46vmax; left:-10vmax; top:-12vmax; background:radial-gradient(circle,var(--indigo),transparent 65%); animation:drift1 22s ease-in-out infinite;}
@@ -38,7 +37,6 @@
   @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-6vmax,6vmax) scale(1.08)}}
   @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5vmax,-6vmax) scale(1.15)}}
 
-  /* 细网格，增加科技质感 */
   .grid-tex{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.35;
     background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
     background-size:48px 48px; mask-image:radial-gradient(120% 90% at 50% 0%,#000 30%,transparent 80%); -webkit-mask-image:radial-gradient(120% 90% at 50% 0%,#000 30%,transparent 80%);}
@@ -49,7 +47,6 @@
     background:radial-gradient(circle, rgba(124,90,247,.18), transparent 60%); transform:translate(-50%,-50%);
     mix-blend-mode:screen; transition:opacity .3s; opacity:0;}
 
-  /* ===== 布局 ===== */
   .wrap{position:relative; z-index:3; flex:1; display:flex; flex-direction:column; align-items:center;
     width:min(1080px,100%); margin:0 auto; padding:clamp(28px,6vw,64px) 22px 40px;}
 
@@ -75,7 +72,7 @@
   .stat{font-size:13px; color:var(--sub);}
   .stat b{display:block; font-size:22px; color:var(--txt); font-weight:700; margin-bottom:2px;}
 
-  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px; width:100%;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px; width:100%; margin-bottom:clamp(48px,8vh,80px);}
   .card{position:relative; display:block; text-decoration:none; color:inherit; padding:30px 28px 26px;
     border-radius:22px; background:var(--card); border:1px solid var(--line); overflow:hidden;
     transform-style:preserve-3d; transition:transform .25s ease, box-shadow .35s ease;
@@ -101,15 +98,33 @@
   .card.m{--c1:var(--indigo); --c2:var(--violet);}
   .card.p{--c1:var(--rose); --c2:var(--rose2);}
 
+  /* ===== 宣传片专区 ===== */
+  .sec-head{text-align:center; margin-bottom:30px;}
+  .sec-head h2{font-size:clamp(24px,4vw,34px); font-weight:800; letter-spacing:-.01em;
+    background:linear-gradient(100deg,#fff,var(--cyan) 50%,var(--violet)); background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 8s linear infinite;}
+  .sec-head p{color:var(--sub); font-size:14px; margin-top:8px;}
+  .films{display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:22px; width:100%; margin-bottom:clamp(40px,7vh,70px);}
+  .film{background:var(--card); border:1px solid var(--line); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px);
+    transition:transform .25s ease, box-shadow .35s ease;}
+  .film:hover{transform:translateY(-6px); box-shadow:0 26px 60px rgba(0,0,0,.5);}
+  .film-v{width:100%; aspect-ratio:16/9; background:#000; display:block; object-fit:cover;}
+  .film-meta{padding:18px 20px 22px;}
+  .chip{display:inline-block; padding:4px 11px; border-radius:999px; font-size:11.5px; font-weight:600; margin-bottom:11px; letter-spacing:.02em;}
+  .chip.oai{background:rgba(16,185,129,.15); color:#34d399; border:1px solid rgba(16,185,129,.4);}
+  .chip.ant{background:rgba(244,114,182,.15); color:#f9a8d4; border:1px solid rgba(244,114,182,.4);}
+  .film h3{font-size:17px; margin-bottom:6px;}
+  .film p{color:var(--sub); font-size:13px; line-height:1.6;}
+  .film .hint{margin-top:10px; font-size:12px; color:rgba(226,232,255,.4);}
+
   footer{position:relative; z-index:3; text-align:center; color:var(--sub); font-size:12.5px; padding:26px 16px 34px;}
 
-  /* 入场动画 */
   .reveal{opacity:0; transform:translateY(26px); filter:blur(6px); animation:rise .9s cubic-bezier(.22,1,.36,1) forwards;}
   @keyframes rise{to{opacity:1; transform:translateY(0); filter:blur(0);}}
-  .d1{animation-delay:.05s} .d2{animation-delay:.18s} .d3{animation-delay:.31s} .d4{animation-delay:.44s} .d5{animation-delay:.57s}
+  .d1{animation-delay:.05s} .d2{animation-delay:.18s} .d3{animation-delay:.31s} .d4{animation-delay:.44s} .d5{animation-delay:.57s} .d6{animation-delay:.68s}
 
   @media (prefers-reduced-motion: reduce){
-    .blob,.badge .spark,.card::before,h1{animation:none!important;}
+    .blob,.badge .spark,.card::before,h1,.sec-head h2{animation:none!important;}
     .reveal{animation:none; opacity:1; transform:none; filter:none;}
     #bg{display:none;}
   }
@@ -124,7 +139,7 @@
   <div class="wrap">
     <header class="reveal d1">
       <div class="brand"><span class="dot"></span> AI Demo Hub</div>
-      <nav class="nav"><a href="#demos">演示</a><a href="#about">关于</a></nav>
+      <nav class="nav"><a href="#demos">演示</a><a href="#films">宣传片</a><a href="#about">关于</a></nav>
     </header>
 
     <section class="hero">
@@ -154,6 +169,39 @@
         <span class="go">打开演示 <span class="arrow">→</span></span>
       </a>
     </section>
+
+    <section id="films">
+      <div class="sec-head reveal d5">
+        <h2>官方宣传片 · Showreel</h2>
+        <p>真实品牌发布影片</p>
+      </div>
+      <div class="films">
+        <article class="film reveal d6">
+          <video class="film-v" controls preload="metadata" playsinline poster="">
+            <source src="videos/gpt6-astra.mp4" type="video/mp4">
+            您的浏览器不支持视频播放。
+          </video>
+          <div class="film-meta">
+            <span class="chip oai">OpenAI</span>
+            <h3>Introducing GPT-6 Astra</h3>
+            <p>OpenAI 旗舰模型发布影片——自主操作电脑、从一条指令到实体物件。</p>
+            <p class="hint">将视频放入 videos/gpt6-astra.mp4</p>
+          </div>
+        </article>
+        <article class="film reveal d6">
+          <video class="film-v" controls preload="metadata" playsinline poster="">
+            <source src="videos/claude-fable5.mp4" type="video/mp4">
+            您的浏览器不支持视频播放。
+          </video>
+          <div class="film-meta">
+            <span class="chip ant">Anthropic</span>
+            <h3>Claude Fable 5</h3>
+            <p>Anthropic 第五代模型创意 / 通用能力发布影片。</p>
+            <p class="hint">将视频放入 videos/claude-fable5.mp4</p>
+          </div>
+        </article>
+      </div>
+    </section>
   </div>
 
   <footer id="about">由 GitHub Pages 托管 · 纯静态 · 离线可用 · © AI Demo Hub</footer>
@@ -161,8 +209,6 @@
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* 粒子星座背景 */
   if(!reduce){
     var canvas = document.getElementById('bg'), ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio||1, 2), parts = [], W, H;
@@ -183,10 +229,8 @@
         ctx.beginPath(); ctx.arc(p.x,p.y,1.3*dpr,0,6.283); ctx.fillStyle='rgba(150,170,255,.7)'; ctx.fill();
         for(var j=i+1;j<parts.length;j++){
           var q=parts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy);
-          if(d<140*dpr){
-            ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
-            ctx.strokeStyle='rgba(120,140,255,'+(.18*(1-d/(140*dpr)))+')'; ctx.lineWidth=dpr*.6; ctx.stroke();
-          }
+          if(d<140*dpr){ ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+            ctx.strokeStyle='rgba(120,140,255,'+(.18*(1-d/(140*dpr)))+')'; ctx.lineWidth=dpr*.6; ctx.stroke(); }
         }
         var mdx=p.x-mouse.x, mdy=p.y-mouse.y, md=Math.sqrt(mdx*mdx+mdy*mdy);
         if(md<180*dpr){ ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.strokeStyle='rgba(168,85,247,'+(.28*(1-md/(180*dpr)))+')'; ctx.lineWidth=dpr*.7; ctx.stroke(); }
@@ -195,13 +239,9 @@
     }
     resize(); window.addEventListener('resize', resize); tick();
   }
-
-  /* 光标光晕 */
   var glow = document.getElementById('glow');
   window.addEventListener('mousemove', function(e){ glow.style.opacity=1; glow.style.transform='translate('+e.clientX+'px,'+e.clientY+'px) translate(-50%,-50%)'; });
   window.addEventListener('mouseleave', function(){ glow.style.opacity=0; });
-
-  /* 卡片 3D 倾斜 + 高光跟随 */
   document.querySelectorAll('[data-tilt]').forEach(function(card){
     card.addEventListener('mousemove', function(e){
       var r=card.getBoundingClientRect();
