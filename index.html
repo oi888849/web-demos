@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>交互演示集 · Demos</title>
+<style>
+  :root{ --bg:#0b0b14; --card:rgba(255,255,255,.06); --line:rgba(255,255,255,.14); --txt:#fff; --sub:rgba(255,255,255,.6); --indigo:#6366f1; --rose:#ff5e57; }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--txt);background:radial-gradient(120% 120% at 50% 0%,#16161f 0%,#0b0b14 60%,#06060c 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 20px;}
+  h1{font-size:28px;font-weight:700;letter-spacing:.02em;margin-bottom:6px;}
+  .lead{color:var(--sub);font-size:14px;margin-bottom:36px;text-align:center;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;width:min(720px,100%);}
+  .card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;}
+  .card:hover{transform:translateY(-4px);border-color:var(--indigo);box-shadow:0 18px 40px rgba(0,0,0,.45);}
+  .ico{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;}
+  .ico.m{background:linear-gradient(135deg,var(--indigo),#7c3aed);}
+  .ico.p{background:linear-gradient(135deg,var(--rose),#ff3b30);}
+  .card h2{font-size:18px;margin-bottom:8px;}
+  .card p{color:var(--sub);font-size:13px;line-height:1.6;}
+  .tag{display:inline-block;margin-top:12px;font-size:12px;color:var(--indigo);}
+  footer{margin-top:40px;color:var(--sub);font-size:12px;text-align:center;}
+  a.link{color:var(--indigo);text-decoration:none;}
+</style>
+</head>
+<body>
+  <h1>交互演示集</h1>
+  <p class="lead">两个单文件、零依赖、可离线运行的交互式演示 · 由 GitHub Pages 托管</p>
+  <div class="grid">
+    <a class="card" href="./mosquito/">
+      <div class="ico m">🦟</div>
+      <h2>智能精准灭蚊系统</h2>
+      <p>精细 3D 诱饵系统 + 本地 AI 推理示意的产品演示。含参数调节面板、演练战报、诱饵配置等。</p>
+      <span class="tag">打开演示 →</span>
+    </a>
+    <a class="card" href="./pomodoro/">
+      <div class="ico p">🍅</div>
+      <h2>番茄钟 · 专注</h2>
+      <p>番茄工作法专注计时应用。魔幻渐变背景、光晕特效、可自定义主题色与导入照片背景，支持 PWA 加到主屏。</p>
+      <span class="tag">打开演示 →</span>
+    </a>
+  </div>
+  <footer>部署于 GitHub Pages · 仓库根路径即本页</footer>
+</body>
+</html>
