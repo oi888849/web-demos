@@ -2,44 +2,217 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>交互演示集 · Demos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI 交互演示集 · Demos</title>
 <style>
-  :root{ --bg:#0b0b14; --card:rgba(255,255,255,.06); --line:rgba(255,255,255,.14); --txt:#fff; --sub:rgba(255,255,255,.6); --indigo:#6366f1; --rose:#ff5e57; }
+  @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+
+  :root{
+    --bg:#05060f;
+    --txt:#eef1ff;
+    --sub:rgba(226,232,255,.62);
+    --indigo:#6366f1; --violet:#a855f7; --cyan:#22d3ee; --rose:#ff5e57; --rose2:#ff3b30;
+    --card:rgba(255,255,255,.045);
+    --line:rgba(255,255,255,.10);
+  }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--txt);background:radial-gradient(120% 120% at 50% 0%,#16161f 0%,#0b0b14 60%,#06060c 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 20px;}
-  h1{font-size:28px;font-weight:700;letter-spacing:.02em;margin-bottom:6px;}
-  .lead{color:var(--sub);font-size:14px;margin-bottom:36px;text-align:center;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;width:min(720px,100%);}
-  .card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;}
-  .card:hover{transform:translateY(-4px);border-color:var(--indigo);box-shadow:0 18px 40px rgba(0,0,0,.45);}
-  .ico{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;}
-  .ico.m{background:linear-gradient(135deg,var(--indigo),#7c3aed);}
-  .ico.p{background:linear-gradient(135deg,var(--rose),#ff3b30);}
-  .card h2{font-size:18px;margin-bottom:8px;}
-  .card p{color:var(--sub);font-size:13px;line-height:1.6;}
-  .tag{display:inline-block;margin-top:12px;font-size:12px;color:var(--indigo);}
-  footer{margin-top:40px;color:var(--sub);font-size:12px;text-align:center;}
-  a.link{color:var(--indigo);text-decoration:none;}
+  html,body{min-height:100%;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    color:var(--txt);
+    background:var(--bg);
+    overflow-x:hidden;
+    position:relative;
+    min-height:100vh;
+    display:flex; flex-direction:column;
+  }
+
+  /* ===== 极光星云背景 ===== */
+  .aurora{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
+  .blob{position:absolute; border-radius:50%; filter:blur(80px); opacity:.55; mix-blend-mode:screen; will-change:transform;}
+  .b1{width:46vmax;height:46vmax; left:-10vmax; top:-12vmax; background:radial-gradient(circle,var(--indigo),transparent 65%); animation:drift1 22s ease-in-out infinite;}
+  .b2{width:40vmax;height:40vmax; right:-12vmax; top:-6vmax; background:radial-gradient(circle,var(--violet),transparent 65%); animation:drift2 26s ease-in-out infinite;}
+  .b3{width:38vmax;height:38vmax; left:8vmax; bottom:-16vmax; background:radial-gradient(circle,var(--cyan),transparent 65%); animation:drift3 30s ease-in-out infinite;}
+  .b4{width:34vmax;height:34vmax; right:2vmax; bottom:-12vmax; background:radial-gradient(circle,var(--rose),transparent 65%); animation:drift1 28s ease-in-out infinite reverse;}
+  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(7vmax,5vmax) scale(1.12)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-6vmax,6vmax) scale(1.08)}}
+  @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5vmax,-6vmax) scale(1.15)}}
+
+  /* 细网格，增加科技质感 */
+  .grid-tex{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.35;
+    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:48px 48px; mask-image:radial-gradient(120% 90% at 50% 0%,#000 30%,transparent 80%); -webkit-mask-image:radial-gradient(120% 90% at 50% 0%,#000 30%,transparent 80%);}
+
+  #bg{position:fixed; inset:0; z-index:1; pointer-events:none;}
+
+  .cursor-glow{position:fixed; width:420px; height:420px; border-radius:50%; left:0; top:0; z-index:2; pointer-events:none;
+    background:radial-gradient(circle, rgba(124,90,247,.18), transparent 60%); transform:translate(-50%,-50%);
+    mix-blend-mode:screen; transition:opacity .3s; opacity:0;}
+
+  /* ===== 布局 ===== */
+  .wrap{position:relative; z-index:3; flex:1; display:flex; flex-direction:column; align-items:center;
+    width:min(1080px,100%); margin:0 auto; padding:clamp(28px,6vw,64px) 22px 40px;}
+
+  header{width:100%; display:flex; align-items:center; justify-content:space-between; margin-bottom:clamp(40px,8vh,80px);}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:.02em;}
+  .brand .dot{width:11px; height:11px; border-radius:50%; background:conic-gradient(from 0deg,var(--cyan),var(--violet),var(--rose),var(--cyan)); box-shadow:0 0 14px var(--violet); animation:spin 5s linear infinite;}
+  .nav{display:flex; gap:22px; font-size:13px; color:var(--sub);}
+  .nav a{color:inherit; text-decoration:none; transition:color .2s;}
+  .nav a:hover{color:var(--txt);}
+
+  .hero{text-align:center; max-width:760px; margin-bottom:clamp(40px,7vh,72px);}
+  .badge{display:inline-flex; align-items:center; gap:8px; padding:7px 15px; border:1px solid var(--line); border-radius:999px;
+    background:rgba(255,255,255,.04); font-size:12.5px; letter-spacing:.14em; color:var(--sub); margin-bottom:26px;
+    backdrop-filter:blur(6px);}
+  .badge .spark{color:var(--cyan);}
+  h1{font-size:clamp(38px,7vw,68px); line-height:1.05; font-weight:800; letter-spacing:-.02em;
+    background:linear-gradient(100deg,#fff 10%,var(--cyan) 30%,var(--violet) 50%,var(--rose) 70%,#fff 90%);
+    background-size:220% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:shine 7s linear infinite; }
+  @keyframes shine{to{background-position:220% center;}}
+  .sub{margin-top:20px; font-size:clamp(15px,2.2vw,18px); color:var(--sub); line-height:1.7;}
+  .stats{display:flex; gap:26px; justify-content:center; margin-top:30px; flex-wrap:wrap;}
+  .stat{font-size:13px; color:var(--sub);}
+  .stat b{display:block; font-size:22px; color:var(--txt); font-weight:700; margin-bottom:2px;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px; width:100%;}
+  .card{position:relative; display:block; text-decoration:none; color:inherit; padding:30px 28px 26px;
+    border-radius:22px; background:var(--card); border:1px solid var(--line); overflow:hidden;
+    transform-style:preserve-3d; transition:transform .25s ease, box-shadow .35s ease;
+    backdrop-filter:blur(10px); will-change:transform;}
+  .card::before{content:""; position:absolute; inset:0; border-radius:inherit; padding:1.4px;
+    background:conic-gradient(from var(--angle), transparent 0deg, var(--c1) 90deg, transparent 180deg, var(--c2) 270deg, transparent 360deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude;
+    animation:spin 6s linear infinite; opacity:.9;}
+  @keyframes spin{to{--angle:360deg;}}
+  .card .sheen{position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .3s;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.10), transparent 45%);}
+  .card:hover{transform:translateY(-8px) scale(1.015); box-shadow:0 30px 70px rgba(0,0,0,.5), 0 0 40px -8px var(--c1);}
+  .card:hover .sheen{opacity:1;}
+  .ico{width:54px; height:54px; border-radius:15px; display:flex; align-items:center; justify-content:center; font-size:28px;
+    background:linear-gradient(135deg,var(--c1),var(--c2)); box-shadow:0 10px 26px -8px var(--c1); margin-bottom:18px;
+    transform:translateZ(40px);}
+  .card h2{font-size:21px; margin-bottom:9px; transform:translateZ(28px);}
+  .card p{color:var(--sub); font-size:13.5px; line-height:1.65; transform:translateZ(18px);}
+  .go{display:inline-flex; align-items:center; gap:7px; margin-top:18px; font-size:13.5px; font-weight:600; color:var(--txt);
+    transform:translateZ(24px);}
+  .go .arrow{transition:transform .25s;}
+  .card:hover .go .arrow{transform:translateX(5px);}
+  .card.m{--c1:var(--indigo); --c2:var(--violet);}
+  .card.p{--c1:var(--rose); --c2:var(--rose2);}
+
+  footer{position:relative; z-index:3; text-align:center; color:var(--sub); font-size:12.5px; padding:26px 16px 34px;}
+
+  /* 入场动画 */
+  .reveal{opacity:0; transform:translateY(26px); filter:blur(6px); animation:rise .9s cubic-bezier(.22,1,.36,1) forwards;}
+  @keyframes rise{to{opacity:1; transform:translateY(0); filter:blur(0);}}
+  .d1{animation-delay:.05s} .d2{animation-delay:.18s} .d3{animation-delay:.31s} .d4{animation-delay:.44s} .d5{animation-delay:.57s}
+
+  @media (prefers-reduced-motion: reduce){
+    .blob,.badge .spark,.card::before,h1{animation:none!important;}
+    .reveal{animation:none; opacity:1; transform:none; filter:none;}
+    #bg{display:none;}
+  }
 </style>
 </head>
 <body>
-  <h1>交互演示集</h1>
-  <p class="lead">两个单文件、零依赖、可离线运行的交互式演示 · 由 GitHub Pages 托管</p>
-  <div class="grid">
-    <a class="card" href="./mosquito/">
-      <div class="ico m">🦟</div>
-      <h2>智能精准灭蚊系统</h2>
-      <p>精细 3D 诱饵系统 + 本地 AI 推理示意的产品演示。含参数调节面板、演练战报、诱饵配置等。</p>
-      <span class="tag">打开演示 →</span>
-    </a>
-    <a class="card" href="./pomodoro/">
-      <div class="ico p">🍅</div>
-      <h2>番茄钟 · 专注</h2>
-      <p>番茄工作法专注计时应用。魔幻渐变背景、光晕特效、可自定义主题色与导入照片背景，支持 PWA 加到主屏。</p>
-      <span class="tag">打开演示 →</span>
-    </a>
+  <div class="aurora"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></div>
+  <div class="grid-tex"></div>
+  <canvas id="bg"></canvas>
+  <div class="cursor-glow" id="glow"></div>
+
+  <div class="wrap">
+    <header class="reveal d1">
+      <div class="brand"><span class="dot"></span> AI Demo Hub</div>
+      <nav class="nav"><a href="#demos">演示</a><a href="#about">关于</a></nav>
+    </header>
+
+    <section class="hero">
+      <div class="badge reveal d2"><span class="spark">✦</span> AI 交互演示集</div>
+      <h1 class="reveal d3">让 AI 触手可及<br>的交互演示</h1>
+      <p class="sub reveal d4">单文件 · 零依赖 · 可离线运行的交互式演示。<br>由 GitHub Pages 静默托管，打开即享流畅体验。</p>
+      <div class="stats reveal d5">
+        <div class="stat"><b>2</b>个演示</div>
+        <div class="stat"><b>100%</b>离线可用</div>
+        <div class="stat"><b>0</b>外部依赖</div>
+      </div>
+    </section>
+
+    <section class="grid" id="demos">
+      <a class="card m reveal d4" href="./mosquito/" data-tilt>
+        <span class="sheen"></span>
+        <div class="ico">🦟</div>
+        <h2>智能精准灭蚊系统</h2>
+        <p>精细 3D 诱饵系统 + 本地 AI 推理示意的产品演示。含参数调节面板、演练战报、诱饵配置等完整交互。</p>
+        <span class="go">打开演示 <span class="arrow">→</span></span>
+      </a>
+      <a class="card p reveal d5" href="./pomodoro/" data-tilt>
+        <span class="sheen"></span>
+        <div class="ico">🍅</div>
+        <h2>番茄钟 · 专注</h2>
+        <p>番茄工作法专注计时应用。魔幻渐变背景、光晕特效、可自定义主题色与导入照片背景，支持 PWA 加到主屏。</p>
+        <span class="go">打开演示 <span class="arrow">→</span></span>
+      </a>
+    </section>
   </div>
-  <footer>部署于 GitHub Pages · 仓库根路径即本页</footer>
+
+  <footer id="about">由 GitHub Pages 托管 · 纯静态 · 离线可用 · © AI Demo Hub</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 粒子星座背景 */
+  if(!reduce){
+    var canvas = document.getElementById('bg'), ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio||1, 2), parts = [], W, H;
+    function resize(){
+      W = canvas.width = innerWidth*dpr; H = canvas.height = innerHeight*dpr;
+      canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px';
+      var count = Math.min(90, Math.floor(innerWidth*innerHeight/16000));
+      parts = [];
+      for(var i=0;i<count;i++) parts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25*dpr,vy:(Math.random()-.5)*.25*dpr});
+    }
+    var mouse = {x:-9999,y:-9999};
+    window.addEventListener('mousemove', function(e){ mouse.x=e.clientX*dpr; mouse.y=e.clientY*dpr; });
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      for(var i=0;i<parts.length;i++){
+        var p=parts[i]; p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+        ctx.beginPath(); ctx.arc(p.x,p.y,1.3*dpr,0,6.283); ctx.fillStyle='rgba(150,170,255,.7)'; ctx.fill();
+        for(var j=i+1;j<parts.length;j++){
+          var q=parts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy);
+          if(d<140*dpr){
+            ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+            ctx.strokeStyle='rgba(120,140,255,'+(.18*(1-d/(140*dpr)))+')'; ctx.lineWidth=dpr*.6; ctx.stroke();
+          }
+        }
+        var mdx=p.x-mouse.x, mdy=p.y-mouse.y, md=Math.sqrt(mdx*mdx+mdy*mdy);
+        if(md<180*dpr){ ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.strokeStyle='rgba(168,85,247,'+(.28*(1-md/(180*dpr)))+')'; ctx.lineWidth=dpr*.7; ctx.stroke(); }
+      }
+      requestAnimationFrame(tick);
+    }
+    resize(); window.addEventListener('resize', resize); tick();
+  }
+
+  /* 光标光晕 */
+  var glow = document.getElementById('glow');
+  window.addEventListener('mousemove', function(e){ glow.style.opacity=1; glow.style.transform='translate('+e.clientX+'px,'+e.clientY+'px) translate(-50%,-50%)'; });
+  window.addEventListener('mouseleave', function(){ glow.style.opacity=0; });
+
+  /* 卡片 3D 倾斜 + 高光跟随 */
+  document.querySelectorAll('[data-tilt]').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      var r=card.getBoundingClientRect();
+      var x=e.clientX-r.left, y=e.clientY-r.top;
+      var rx=((y/r.height)-.5)*-10, ry=((x/r.width)-.5)*10;
+      card.style.transform='translateY(-8px) scale(1.015) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+      card.style.setProperty('--mx', x+'px'); card.style.setProperty('--my', y+'px');
+    });
+    card.addEventListener('mouseleave', function(){ card.style.transform=''; });
+  });
+})();
+</script>
 </body>
 </html>
