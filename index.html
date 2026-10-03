@@ -109,6 +109,8 @@
     transition:transform .25s ease, box-shadow .35s ease;}
   .film:hover{transform:translateY(-6px); box-shadow:0 26px 60px rgba(0,0,0,.5);}
   .film-v{width:100%; aspect-ratio:16/9; background:#000; display:block; object-fit:cover;}
+  .film-iframe{width:100%; aspect-ratio:16/9; border:0; display:block; background:#000;}
+  .chip.xai{background:rgba(255,255,255,.10); color:#fff; border:1px solid rgba(255,255,255,.25);}
   .film-meta{padding:18px 20px 22px;}
   .chip{display:inline-block; padding:4px 11px; border-radius:999px; font-size:11.5px; font-weight:600; margin-bottom:11px; letter-spacing:.02em;}
   .chip.oai{background:rgba(16,185,129,.15); color:#34d399; border:1px solid rgba(16,185,129,.4);}
@@ -198,6 +200,15 @@
             <h3>Claude Fable 5</h3>
             <p>Anthropic 第五代模型创意 / 通用能力发布影片。</p>
             <p class="hint">将视频放入 videos/claude-fable5.mp4</p>
+          </div>
+        </article>
+        <article class="film reveal d6">
+          <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1cLaL6cEJb&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
+          <div class="film-meta">
+            <span class="chip xai">xAI · Grok</span>
+            <h3>Grok Bot 官方宣传片</h3>
+            <p>xAI 具名 AI 队友 Grok Bot 的官方宣传片——B站嵌入，英文原声·中英双语字幕，直接可播。</p>
+            <p class="hint">来自 B站 BV1cLaL6cEJb</p>
           </div>
         </article>
       </div>
