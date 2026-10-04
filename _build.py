@@ -30,22 +30,14 @@ CARDS = {
   'zhipu-glm-5-3':    ('智谱 GLM-5.3 宣传片', '智谱 AI', 'misc', '智谱 GLM-5.3 发布影片。', 'local', 'zhipu-glm-5-3.mp4'),
   'zhipu-glm-5-3-flash': ('智谱 GLM-5.3-Flash 宣传片', '智谱 AI', 'misc', '智谱 GLM-5.3-Flash 发布影片。', 'local', 'zhipu-glm-5-3-flash.mp4'),
   'zhipu-glm-5v-turbo': ('智谱 GLM-5V-Turbo 宣传片', '智谱 AI', 'misc', '智谱 GLM-5V-Turbo 发布影片。', 'local', 'zhipu-glm-5v-turbo.mp4'),
-  'hunyuan-video-foley': ('腾讯混元 Video-Foley 宣传片', '腾讯混元', 'misc', '腾讯混元 Video-Foley 图生视频发布影片。', 'local', 'hunyuan-video-foley.mp4'),
-  'hunyuan-t1-show':  ('腾讯混元 T1 · 展示', '腾讯混元', 'misc', '腾讯混元 T1 深度思考模型展示片。', 'local', 'hunyuan-t1-show.mp4'),
-  'qwen-audio-3-0':   ('阿里 Qwen-Audio 3.0 宣传片', '阿里 · Qwen', 'misc', '阿里巴巴 Qwen-Audio 3.0 发布影片。', 'local', 'qwen-audio-3-0.mp4'),
-  'qwen-audio-3-1':   ('阿里 Qwen-Audio 3.1 宣传片', '阿里 · Qwen', 'misc', '阿里巴巴 Qwen-Audio 3.1 发布影片。', 'local', 'qwen-audio-3-1.mp4'),
-  'qwen2-math':       ('阿里 Qwen2-Math 宣传片', '阿里 · Qwen', 'misc', '阿里巴巴 Qwen2-Math 发布影片。', 'local', 'qwen2-math.mp4'),
   'stepfun-step5':    ('阶跃 Step5 宣传片', '阶跃 StepFun', 'misc', '阶跃 StepFun Step5 发布影片。', 'local', 'stepfun-step5.mp4'),
-  'ai-promo-extra':   ('阿里 千问办公 宣传片', '阿里 · 通义千问', 'misc', '阿里巴巴通义千问「千问办公」产品发布影片。', 'local', 'ai-promo-extra.mp4'),
   'openai-2026':      ('OpenAI 2026 发布会宣传片', 'OpenAI', 'oai', 'OpenAI 2026 秋季发布会影片（超 100MB，B站直嵌）。', 'bili', 'BV1cQap6UEDY'),
-  'hunyuan-t1':       ('腾讯混元 T1 正式版发布', '腾讯混元', 'misc', '腾讯混元 T1 深度思考模型正式版发布影片（超 100MB，B站直嵌）。', 'bili', 'BV1xUoCYEE1L'),
 }
 
 ORDER = ['grok-bot','gpt6-astra','claude-fable5','kimi-k3','grok-4-7','claude-opus-5-5',
          'minimax-design','minimax-h3','minimax-m3','zhipu-glm-5','zhipu-glm-5-1','zhipu-glm-5-2',
-         'zhipu-glm-5-3','zhipu-glm-5-3-flash','zhipu-glm-5v-turbo','hunyuan-video-foley',
-         'hunyuan-t1-show','qwen-audio-3-0','qwen-audio-3-1','qwen2-math','stepfun-step5',
-         'ai-promo-extra','openai-2026','hunyuan-t1']
+         'zhipu-glm-5-3','zhipu-glm-5-3-flash','zhipu-glm-5v-turbo','stepfun-step5',
+         'openai-2026']
 
 # ---- determine which cards are available ----
 used = set()
@@ -67,7 +59,7 @@ for slug in ORDER:
         continue
     title, brand, chip, desc, kind, src = CARDS[slug]
     if kind == 'bili':
-        inner = ('      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=%s&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>\n'
+        inner = ('      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=%s&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen loading="lazy"></iframe>\n'
                  '      <div class="film-meta">\n'
                  '        <span class="chip %s">%s</span>\n'
                  '        <h3>%s</h3>\n'

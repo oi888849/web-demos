@@ -16,7 +16,8 @@
     --line:rgba(255,255,255,.10);
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  html,body{min-height:100%;}
+  html,body{min-height:100%; scroll-behavior:smooth;}
+  section{scroll-margin-top:84px;}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
     color:var(--txt);
@@ -48,9 +49,9 @@
     mix-blend-mode:screen; transition:opacity .3s; opacity:0;}
 
   .wrap{position:relative; z-index:3; flex:1; display:flex; flex-direction:column; align-items:center;
-    width:min(1080px,100%); margin:0 auto; padding:clamp(28px,6vw,64px) 22px 40px;}
+    width:min(1080px,100%); margin:0 auto; padding:clamp(28px,6vw,64px) clamp(14px,5vw,22px) 40px;}
 
-  header{width:100%; display:flex; align-items:center; justify-content:space-between; margin-bottom:clamp(40px,8vh,80px);}
+  header{width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:clamp(40px,8vh,80px);}
   .brand{display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:.02em;}
   .brand .dot{width:11px; height:11px; border-radius:50%; background:conic-gradient(from 0deg,var(--cyan),var(--violet),var(--rose),var(--cyan)); box-shadow:0 0 14px var(--violet); animation:spin 5s linear infinite;}
   .nav{display:flex; gap:22px; font-size:13px; color:var(--sub);}
@@ -72,7 +73,7 @@
   .stat{font-size:13px; color:var(--sub);}
   .stat b{display:block; font-size:22px; color:var(--txt); font-weight:700; margin-bottom:2px;}
 
-  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px; width:100%; margin-bottom:clamp(48px,8vh,80px);}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:22px; width:100%; margin-bottom:clamp(48px,8vh,80px);}
   .card{position:relative; display:block; text-decoration:none; color:inherit; padding:30px 28px 26px;
     border-radius:22px; background:var(--card); border:1px solid var(--line); overflow:hidden;
     transform-style:preserve-3d; transition:transform .25s ease, box-shadow .35s ease;
@@ -99,25 +100,40 @@
   .card.p{--c1:var(--rose); --c2:var(--rose2);}
 
   /* ===== 宣传片专区 ===== */
-  .sec-head{text-align:center; margin-bottom:30px;}
+  .sec-head{text-align:center; margin-bottom:34px;}
   .sec-head h2{font-size:clamp(24px,4vw,34px); font-weight:800; letter-spacing:-.01em;
     background:linear-gradient(100deg,#fff,var(--cyan) 50%,var(--violet)); background-size:200% auto;
     -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 8s linear infinite;}
   .sec-head p{color:var(--sub); font-size:14px; margin-top:8px;}
-  .films{display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:22px; width:100%; margin-bottom:clamp(40px,7vh,70px);}
-  .film{background:var(--card); border:1px solid var(--line); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px);
-    transition:transform .25s ease, box-shadow .35s ease;}
-  .film:hover{transform:translateY(-6px); box-shadow:0 26px 60px rgba(0,0,0,.5);}
+  .sec-head::after{content:""; display:block; width:64px; height:3px; margin:16px auto 0; border-radius:3px;
+    background:linear-gradient(90deg,var(--cyan),var(--violet)); box-shadow:0 0 18px rgba(124,90,247,.6);}
+
+  .films{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:22px; width:100%; margin-bottom:clamp(40px,7vh,70px);}
+
+  .film{position:relative; background:var(--card); border:1px solid var(--line); border-radius:20px; overflow:hidden; backdrop-filter:blur(10px);
+    transition:transform .28s ease, box-shadow .4s ease, border-color .3s ease; will-change:transform;}
+  /* 品牌强调色（按 chip 派生）+ 悬浮渐变描边 */
+  .film:has(.chip.xai){--c1:#a78bfa; --c2:#22d3ee;}
+  .film:has(.chip.oai){--c1:#34d399; --c2:#10b981;}
+  .film:has(.chip.ant){--c1:#f9a8d4; --c2:#fb7185;}
+  .film:has(.chip.misc){--c1:#818cf8; --c2:#22d3ee;}
+  .film::before{content:""; position:absolute; inset:0; border-radius:inherit; padding:1.4px; z-index:2; pointer-events:none;
+    background:conic-gradient(from var(--angle), transparent 0deg, var(--c1,var(--violet)) 90deg, transparent 180deg, var(--c2,var(--cyan)) 270deg, transparent 360deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude;
+    opacity:0; transition:opacity .35s; animation:spin 6s linear infinite;}
+  .film:hover::before{opacity:1;}
+  .film:hover{transform:translateY(-6px); border-color:rgba(255,255,255,.28); box-shadow:0 26px 60px rgba(0,0,0,.5), 0 0 34px -8px var(--c1,var(--violet));}
   .film-v{width:100%; aspect-ratio:16/9; background:#000; display:block; object-fit:cover;}
   .film-iframe{width:100%; aspect-ratio:16/9; border:0; display:block; background:#000;}
-  .chip.xai{background:rgba(255,255,255,.10); color:#fff; border:1px solid rgba(255,255,255,.25);}
-  .film-meta{padding:18px 20px 22px;}
+
   .chip{display:inline-block; padding:4px 11px; border-radius:999px; font-size:11.5px; font-weight:600; margin-bottom:11px; letter-spacing:.02em;}
+  .chip.xai{background:rgba(255,255,255,.10); color:#fff; border:1px solid rgba(255,255,255,.25);}
   .chip.oai{background:rgba(16,185,129,.15); color:#34d399; border:1px solid rgba(16,185,129,.4);}
   .chip.ant{background:rgba(244,114,182,.15); color:#f9a8d4; border:1px solid rgba(244,114,182,.4);}
   .chip.misc{background:rgba(255,255,255,.10); color:#cdd6ff; border:1px solid rgba(255,255,255,.22);}
-  .film h3{font-size:17px; margin-bottom:6px;}
-  .film p{color:var(--sub); font-size:13px; line-height:1.6;}
+  .film-meta{padding:18px 20px 22px;}
+  .film h3{font-size:17px; margin-bottom:7px; letter-spacing:.01em;}
+  .film p{color:var(--sub); font-size:13px; line-height:1.65;}
   .film .hint{margin-top:10px; font-size:12px; color:rgba(226,232,255,.4);}
 
   footer{position:relative; z-index:3; text-align:center; color:var(--sub); font-size:12.5px; padding:26px 16px 34px;}
@@ -151,7 +167,7 @@
         <p class="sub reveal d4">单文件 · 零依赖的交互式演示。<br>宣传片实时可播（B站直嵌 + 本地），打开即享流畅体验。</p>
         <div class="stats reveal d5">
           <div class="stat"><b>2</b>个演示</div>
-          <div class="stat"><b>24</b>品牌影片</div>
+          <div class="stat"><b>17</b>品牌影片</div>
           <div class="stat"><b>0</b>演示依赖</div>
         </div>
     </section>
@@ -180,7 +196,7 @@
       </div>
       <div class="films">
       <article class="film reveal d6">
-      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1cLaL6cEJb&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
+      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1cLaL6cEJb&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen loading="lazy"></iframe>
       <div class="film-meta">
         <span class="chip xai">xAI · Grok</span>
         <h3>Grok Bot 官方宣传片</h3>
@@ -189,7 +205,7 @@
       </div>
       </article>
       <article class="film reveal d6">
-      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1dTtv6aE5y&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
+      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1dTtv6aE5y&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen loading="lazy"></iframe>
       <div class="film-meta">
         <span class="chip oai">OpenAI</span>
         <h3>Introducing GPT-6 Astra</h3>
@@ -342,61 +358,6 @@
       </article>
       <article class="film reveal d6">
       <video class="film-v" controls preload="metadata" playsinline poster="">
-        <source src="videos/hunyuan-video-foley.mp4" type="video/mp4">
-        您的浏览器不支持视频播放。
-      </video>
-      <div class="film-meta">
-        <span class="chip misc">腾讯混元</span>
-        <h3>腾讯混元 Video-Foley 宣传片</h3>
-        <p>腾讯混元 Video-Foley 图生视频发布影片。</p>
-      </div>
-      </article>
-      <article class="film reveal d6">
-      <video class="film-v" controls preload="metadata" playsinline poster="">
-        <source src="videos/hunyuan-t1-show.mp4" type="video/mp4">
-        您的浏览器不支持视频播放。
-      </video>
-      <div class="film-meta">
-        <span class="chip misc">腾讯混元</span>
-        <h3>腾讯混元 T1 · 展示</h3>
-        <p>腾讯混元 T1 深度思考模型展示片。</p>
-      </div>
-      </article>
-      <article class="film reveal d6">
-      <video class="film-v" controls preload="metadata" playsinline poster="">
-        <source src="videos/qwen-audio-3-0.mp4" type="video/mp4">
-        您的浏览器不支持视频播放。
-      </video>
-      <div class="film-meta">
-        <span class="chip misc">阿里 · Qwen</span>
-        <h3>阿里 Qwen-Audio 3.0 宣传片</h3>
-        <p>阿里巴巴 Qwen-Audio 3.0 发布影片。</p>
-      </div>
-      </article>
-      <article class="film reveal d6">
-      <video class="film-v" controls preload="metadata" playsinline poster="">
-        <source src="videos/qwen-audio-3-1.mp4" type="video/mp4">
-        您的浏览器不支持视频播放。
-      </video>
-      <div class="film-meta">
-        <span class="chip misc">阿里 · Qwen</span>
-        <h3>阿里 Qwen-Audio 3.1 宣传片</h3>
-        <p>阿里巴巴 Qwen-Audio 3.1 发布影片。</p>
-      </div>
-      </article>
-      <article class="film reveal d6">
-      <video class="film-v" controls preload="metadata" playsinline poster="">
-        <source src="videos/qwen2-math.mp4" type="video/mp4">
-        您的浏览器不支持视频播放。
-      </video>
-      <div class="film-meta">
-        <span class="chip misc">阿里 · Qwen</span>
-        <h3>阿里 Qwen2-Math 宣传片</h3>
-        <p>阿里巴巴 Qwen2-Math 发布影片。</p>
-      </div>
-      </article>
-      <article class="film reveal d6">
-      <video class="film-v" controls preload="metadata" playsinline poster="">
         <source src="videos/stepfun-step5.mp4" type="video/mp4">
         您的浏览器不支持视频播放。
       </video>
@@ -407,32 +368,12 @@
       </div>
       </article>
       <article class="film reveal d6">
-      <video class="film-v" controls preload="metadata" playsinline poster="">
-        <source src="videos/ai-promo-extra.mp4" type="video/mp4">
-        您的浏览器不支持视频播放。
-      </video>
-      <div class="film-meta">
-        <span class="chip misc">阿里 · 通义千问</span>
-        <h3>阿里 千问办公 宣传片</h3>
-        <p>阿里巴巴通义千问「千问办公」产品发布影片。</p>
-      </div>
-      </article>
-      <article class="film reveal d6">
-      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1cQap6UEDY&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
+      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1cQap6UEDY&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen loading="lazy"></iframe>
       <div class="film-meta">
         <span class="chip oai">OpenAI</span>
         <h3>OpenAI 2026 发布会宣传片</h3>
         <p>OpenAI 2026 秋季发布会影片（超 100MB，B站直嵌）。</p>
         <p class="hint">来自 B站 BV1cQap6UEDY</p>
-      </div>
-      </article>
-      <article class="film reveal d6">
-      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=BV1xUoCYEE1L&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen></iframe>
-      <div class="film-meta">
-        <span class="chip misc">腾讯混元</span>
-        <h3>腾讯混元 T1 正式版发布</h3>
-        <p>腾讯混元 T1 深度思考模型正式版发布影片（超 100MB，B站直嵌）。</p>
-        <p class="hint">来自 B站 BV1xUoCYEE1L</p>
       </div>
       </article>
       </div>
