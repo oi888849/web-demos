@@ -14,10 +14,11 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
 # slug -> (bvid, out_mp4_name)
+# 选源原则：源片分辨率越高越好（未登录只能拉到 720P 转码，
+# 但 1080P 源片的 720P 转码码率明显高于 720P 源片，画质更好）
 JOBS = {
-    'grok-bot':    ('BV1wagG6KEf1', 'grok-bot.mp4'),
-    'gpt6-astra':  ('BV15gtv6hEjs', 'gpt6-astra.mp4'),
-    'openai-2026': ('BV1cQap6UEDY', 'openai-dots.mp4'),
+    'gpt6-astra':  ('BV1CJbc6JExi', 'gpt6-astra.mp4'),   # 1920x1080 源片，163s，精校中英字幕
+    'openai-dots': ('BV1aaao68EwZ', 'openai-dots.mp4'),  # 1920x1080 源片，148s，双语字幕
 }
 
 

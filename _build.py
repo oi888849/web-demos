@@ -15,7 +15,6 @@ IDX  = os.path.join(HERE, 'index.html')
 
 # slug -> (title, brand, chip_class, desc, kind, file_or_bvid)
 CARDS = {
-  'grok-bot':         ('Grok Bot 官方宣传片', 'xAI · Grok', 'xai', 'xAI 具名 AI 队友 Grok Bot 发布影片。', 'local', 'grok-bot.mp4'),
   'gpt6-astra':       ('Introducing GPT-6 Astra', 'OpenAI', 'oai', 'OpenAI 旗舰模型发布影片（中文字幕版）。', 'local', 'gpt6-astra.mp4'),
   'claude-fable5':    ('Claude Fable 5.1 宣传片', 'Anthropic', 'ant', 'Anthropic Fable 5.1 创意 / 通用能力发布影片（本地直出）。', 'local', 'claude-fable5.mp4'),
   'claude-opus-5-5':  ('Claude Opus 5.5 宣传片', 'Anthropic', 'ant', 'Anthropic Claude Opus 5.5 发布影片。', 'local', 'claude-opus-5-5.mp4'),
@@ -33,9 +32,8 @@ CARDS = {
 
 # optional footnote shown under a card (source attribution)
 NOTES = {
-  'grok-bot':    '片源 B站 · 量子位Daily（已转本地）',
-  'gpt6-astra':  '片源 B站 · AI顾晚宁（已转本地）',
-  'openai-dots': '片源 B站 · 花火火花Official（已转本地）',
+  'gpt6-astra':  '片源 B站 · 爱学习的朱家乐（1080P 源片）',
+  'openai-dots': '片源 B站 · Gante393（1080P 源片，双语字幕）',
 }
 
 # optional poster image (auto-detected next to the mp4 if present)
@@ -46,7 +44,7 @@ def poster_for(src):
             return 'videos/' + p
     return ''
 
-ORDER = ['grok-bot','gpt6-astra','claude-fable5','claude-opus-5-5',
+ORDER = ['gpt6-astra','claude-fable5','claude-opus-5-5',
          'minimax-design','minimax-h3','minimax-m3','zhipu-glm-5','zhipu-glm-5-1','zhipu-glm-5-2',
          'zhipu-glm-5-3','zhipu-glm-5-3-flash','zhipu-glm-5v-turbo',
          'openai-dots']
