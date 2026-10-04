@@ -15,8 +15,8 @@ IDX  = os.path.join(HERE, 'index.html')
 
 # slug -> (title, brand, chip_class, desc, kind, file_or_bvid)
 CARDS = {
-  'grok-bot':         ('Grok Bot 官方宣传片', 'xAI · Grok', 'xai', 'xAI 具名 AI 队友 Grok Bot 发布影片。', 'bili', 'BV1wagG6KEf1'),
-  'gpt6-astra':       ('Introducing GPT-6 Astra', 'OpenAI', 'oai', 'OpenAI 旗舰模型发布影片（中文字幕版）。', 'bili', 'BV15gtv6hEjs'),
+  'grok-bot':         ('Grok Bot 官方宣传片', 'xAI · Grok', 'xai', 'xAI 具名 AI 队友 Grok Bot 发布影片。', 'local', 'grok-bot.mp4'),
+  'gpt6-astra':       ('Introducing GPT-6 Astra', 'OpenAI', 'oai', 'OpenAI 旗舰模型发布影片（中文字幕版）。', 'local', 'gpt6-astra.mp4'),
   'claude-fable5':    ('Claude Fable 5.1 宣传片', 'Anthropic', 'ant', 'Anthropic Fable 5.1 创意 / 通用能力发布影片（本地直出）。', 'local', 'claude-fable5.mp4'),
   'claude-opus-5-5':  ('Claude Opus 5.5 宣传片', 'Anthropic', 'ant', 'Anthropic Claude Opus 5.5 发布影片。', 'local', 'claude-opus-5-5.mp4'),
   'minimax-design':   ('MiniMax Design 宣传片', 'MiniMax', 'misc', 'MiniMax Design 模型发布影片。', 'local', 'minimax-design.mp4'),
@@ -28,13 +28,28 @@ CARDS = {
   'zhipu-glm-5-3':    ('智谱 GLM-5.3 宣传片', '智谱 AI', 'misc', '智谱 GLM-5.3 发布影片。', 'local', 'zhipu-glm-5-3.mp4'),
   'zhipu-glm-5-3-flash': ('智谱 GLM-5.3-Flash 宣传片', '智谱 AI', 'misc', '智谱 GLM-5.3-Flash 发布影片。', 'local', 'zhipu-glm-5-3-flash.mp4'),
   'zhipu-glm-5v-turbo': ('智谱 GLM-5V-Turbo 宣传片', '智谱 AI', 'misc', '智谱 GLM-5V-Turbo 发布影片。', 'local', 'zhipu-glm-5v-turbo.mp4'),
-  'openai-2026':      ('OpenAI 2026 发布会宣传片', 'OpenAI', 'oai', 'OpenAI 2026 秋季发布会影片（超 100MB，B站直嵌）。', 'bili', 'BV1cQap6UEDY'),
+  'openai-dots':      ('OpenAI dots 宣传片', 'OpenAI', 'oai', 'OpenAI dots 官方发布影片（720P 本地直出）。', 'local', 'openai-dots.mp4'),
 }
+
+# optional footnote shown under a card (source attribution)
+NOTES = {
+  'grok-bot':    '片源 B站 · 量子位Daily（已转本地）',
+  'gpt6-astra':  '片源 B站 · AI顾晚宁（已转本地）',
+  'openai-dots': '片源 B站 · 花火火花Official（已转本地）',
+}
+
+# optional poster image (auto-detected next to the mp4 if present)
+def poster_for(src):
+    for ext in ('.jpg', '.jpeg', '.png', '.webp'):
+        p = src.rsplit('.', 1)[0] + ext
+        if os.path.exists(os.path.join(DST, p)):
+            return 'videos/' + p
+    return ''
 
 ORDER = ['grok-bot','gpt6-astra','claude-fable5','claude-opus-5-5',
          'minimax-design','minimax-h3','minimax-m3','zhipu-glm-5','zhipu-glm-5-1','zhipu-glm-5-2',
          'zhipu-glm-5-3','zhipu-glm-5-3-flash','zhipu-glm-5v-turbo',
-         'openai-2026']
+         'openai-dots']
 
 # ---- determine which cards are available ----
 used = set()
@@ -64,7 +79,9 @@ for slug in ORDER:
                  '        <p class="hint">来自 B站 %s</p>\n'
                  '      </div>') % (src, chip, brand, title, desc, src)
     else:
-        inner = ('      <video class="film-v" controls preload="metadata" playsinline poster="">\n'
+        note = NOTES.get(slug)
+        note_html = ('\n        <p class="hint">%s</p>' % note) if note else ''
+        inner = ('      <video class="film-v" controls preload="metadata" playsinline poster="%s">\n'
                  '        <source src="videos/%s" type="video/mp4">\n'
                  '        您的浏览器不支持视频播放。\n'
                  '      </video>\n'
@@ -72,7 +89,9 @@ for slug in ORDER:
                  '        <span class="chip %s">%s</span>\n'
                  '        <h3>%s</h3>\n'
                  '        <p>%s</p>\n'
-                 '      </div>') % (src, chip, brand, title, desc)
+                 '      </div>') % (poster_for(src), src, chip, brand, title, desc)
+        if note_html:
+            inner = inner.replace('      </div>', note_html + '\n      </div>')
     cards_html.append('      <article class="film reveal d6">\n' + inner + '\n      </article>')
 
 block = '\n'.join(cards_html)
