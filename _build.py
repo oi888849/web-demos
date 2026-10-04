@@ -15,8 +15,8 @@ IDX  = os.path.join(HERE, 'index.html')
 
 # slug -> (title, brand, chip_class, desc, kind, file_or_bvid)
 CARDS = {
-  'grok-bot':         ('Grok Bot 官方宣传片', 'xAI · Grok', 'xai', 'xAI 具名 AI 队友 Grok Bot 官方宣传片。', 'bili', 'BV1cLaL6cEJb'),
-  'gpt6-astra':       ('Introducing GPT-6 Astra', 'OpenAI', 'oai', 'OpenAI 旗舰模型发布影片——自主操作电脑、从一条指令到实体物件。', 'bili', 'BV1dTtv6aE5y'),
+  'grok-bot':         ('Grok Bot 官方宣传片', 'xAI · Grok', 'xai', 'xAI 具名 AI 队友 Grok Bot 发布影片。', 'bili', 'BV1wagG6KEf1'),
+  'gpt6-astra':       ('Introducing GPT-6 Astra', 'OpenAI', 'oai', 'OpenAI 旗舰模型发布影片（中文字幕版）。', 'bili', 'BV15gtv6hEjs'),
   'claude-fable5':    ('Claude Fable 5.1 宣传片', 'Anthropic', 'ant', 'Anthropic Fable 5.1 创意 / 通用能力发布影片（本地直出）。', 'local', 'claude-fable5.mp4'),
   'claude-opus-5-5':  ('Claude Opus 5.5 宣传片', 'Anthropic', 'ant', 'Anthropic Claude Opus 5.5 发布影片。', 'local', 'claude-opus-5-5.mp4'),
   'minimax-design':   ('MiniMax Design 宣传片', 'MiniMax', 'misc', 'MiniMax Design 模型发布影片。', 'local', 'minimax-design.mp4'),
@@ -56,7 +56,7 @@ for slug in ORDER:
         continue
     title, brand, chip, desc, kind, src = CARDS[slug]
     if kind == 'bili':
-        inner = ('      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=%s&amp;page=1&amp;high_quality=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen loading="lazy"></iframe>\n'
+        inner = ('      <iframe class="film-iframe" src="https://player.bilibili.com/player.html?bvid=%s&amp;page=1&amp;as_wide=1&amp;danmaku=0" scrolling="no" frameborder="0" allowfullscreen loading="lazy"></iframe>\n'
                  '      <div class="film-meta">\n'
                  '        <span class="chip %s">%s</span>\n'
                  '        <h3>%s</h3>\n'
