@@ -18,7 +18,6 @@ CARDS = {
   'grok-bot':         ('Grok Bot 官方宣传片', 'xAI · Grok', 'xai', 'xAI 具名 AI 队友 Grok Bot 官方宣传片。', 'bili', 'BV1cLaL6cEJb'),
   'gpt6-astra':       ('Introducing GPT-6 Astra', 'OpenAI', 'oai', 'OpenAI 旗舰模型发布影片——自主操作电脑、从一条指令到实体物件。', 'bili', 'BV1dTtv6aE5y'),
   'claude-fable5':    ('Claude Fable 5.1 宣传片', 'Anthropic', 'ant', 'Anthropic Fable 5.1 创意 / 通用能力发布影片（本地直出）。', 'local', 'claude-fable5.mp4'),
-  'kimi-k3':          ('Kimi K3 宣传片', 'Moonshot · Kimi', 'misc', 'Moonshot Kimi K3 发布影片。', 'local', 'kimi-k3.mp4'),
   'grok-4-7':         ('Grok 4.7 宣传片', 'xAI', 'xai', 'xAI Grok 4.7 发布影片。', 'local', 'grok-4-7.mp4'),
   'claude-opus-5-5':  ('Claude Opus 5.5 宣传片', 'Anthropic', 'ant', 'Anthropic Claude Opus 5.5 发布影片。', 'local', 'claude-opus-5-5.mp4'),
   'minimax-design':   ('MiniMax Design 宣传片', 'MiniMax', 'misc', 'MiniMax Design 模型发布影片。', 'local', 'minimax-design.mp4'),
@@ -30,13 +29,12 @@ CARDS = {
   'zhipu-glm-5-3':    ('智谱 GLM-5.3 宣传片', '智谱 AI', 'misc', '智谱 GLM-5.3 发布影片。', 'local', 'zhipu-glm-5-3.mp4'),
   'zhipu-glm-5-3-flash': ('智谱 GLM-5.3-Flash 宣传片', '智谱 AI', 'misc', '智谱 GLM-5.3-Flash 发布影片。', 'local', 'zhipu-glm-5-3-flash.mp4'),
   'zhipu-glm-5v-turbo': ('智谱 GLM-5V-Turbo 宣传片', '智谱 AI', 'misc', '智谱 GLM-5V-Turbo 发布影片。', 'local', 'zhipu-glm-5v-turbo.mp4'),
-  'stepfun-step5':    ('阶跃 Step5 宣传片', '阶跃 StepFun', 'misc', '阶跃 StepFun Step5 发布影片。', 'local', 'stepfun-step5.mp4'),
   'openai-2026':      ('OpenAI 2026 发布会宣传片', 'OpenAI', 'oai', 'OpenAI 2026 秋季发布会影片（超 100MB，B站直嵌）。', 'bili', 'BV1cQap6UEDY'),
 }
 
-ORDER = ['grok-bot','gpt6-astra','claude-fable5','kimi-k3','grok-4-7','claude-opus-5-5',
+ORDER = ['grok-bot','gpt6-astra','claude-fable5','grok-4-7','claude-opus-5-5',
          'minimax-design','minimax-h3','minimax-m3','zhipu-glm-5','zhipu-glm-5-1','zhipu-glm-5-2',
-         'zhipu-glm-5-3','zhipu-glm-5-3-flash','zhipu-glm-5v-turbo','stepfun-step5',
+         'zhipu-glm-5-3','zhipu-glm-5-3-flash','zhipu-glm-5v-turbo',
          'openai-2026']
 
 # ---- determine which cards are available ----
